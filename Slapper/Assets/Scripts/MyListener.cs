@@ -20,7 +20,10 @@ public class MyListener : MonoBehaviour
     float xGyro = 0;
     float yGyro = 0;
     float zGyro = 0;
+    public Vector3 AcceleratorDeadzone = Vector3.zero;
+    public Vector3 GryoDeadzone = Vector3.zero;
     public float sensitivity = 0.0002f;
+    public float sensitivityA = 0.0000002f;
     public float zDrift = 0.2f;
     float zDriftCalculation;
     private float prevZ;
@@ -28,6 +31,8 @@ public class MyListener : MonoBehaviour
     public float error = 1f;
     public bool calibrated;
     public float acceleration;
+    float timer;
+    float recalibrateTime = 0.1f;
     bool check1;
 
     void Start() // Start is called before the first frame update
@@ -36,15 +41,16 @@ public class MyListener : MonoBehaviour
     }
     void Update() // Update is called once per frame
     {
-        prevZ = Mathf.Abs(transform.rotation.z);
-        if (calibrated)
+        RotateCube();
+        if (xGyro == 0 && yGyro == 0 && zGyro == 0)
         {
-            RotateCube();
+            timer += Time.deltaTime;
         }
-        else
+        else { timer = 0; }
+        if (timer > recalibrateTime)
         {
-
-            Calibrate();
+            timer = 0;
+            cubeModifier.transform.rotation = Quaternion.identity;
         }
     }
     void OnMessageArrived(string msg)
@@ -58,6 +64,30 @@ public class MyListener : MonoBehaviour
         xGyro = floatNumbers[3];
         yGyro = floatNumbers[4];
         zGyro = floatNumbers[5];
+        if(Mathf.Abs(xGyro) < GryoDeadzone.x)
+        {
+            xGyro = 0;
+        }
+         if(Mathf.Abs(yGyro) < GryoDeadzone.y)
+        {
+            yGyro = 0;
+        }
+        if (Mathf.Abs(zGyro) < GryoDeadzone.z)
+        {
+            zGyro= 0;
+        }
+        if (Mathf.Abs(xAccel) < AcceleratorDeadzone.x)
+        {
+            xAccel = 0;
+        }
+        if (Mathf.Abs(yAccel) < AcceleratorDeadzone.y)
+        {
+            yAccel = 0;
+        }
+        if (Mathf.Abs(zAccel) < AcceleratorDeadzone.z)
+        {
+            zAccel = 0;
+        }
         Debug.Log("XA: " + xAccel + " YA: " +  yAccel + " ZA: " +  zAccel + "   XG: " + xGyro + " YG: " + yGyro + " ZG: " + zGyro);
     }
     // Invoked when a connect/disconnect event occurs. The parameter 'success'
@@ -67,24 +97,6 @@ public class MyListener : MonoBehaviour
     {
         Debug.Log(success ? "Device connected" : "Device disconnected");
     }
-    void Calibrate()
-    {
-        curZ = Mathf.Abs(transform.rotation.z);
-        acceleration = (curZ - prevZ);
-        if (acceleration > error)
-        {
-            zDriftCalculation += zDrift;
-        }
-        else if (acceleration < -error)
-        {
-            zDriftCalculation -= zDrift;
-        }
-        else
-        {
-            calibrated = true;
-        }
-        cubeModifier.transform.eulerAngles = Vector3.zero;
-    }
 
     void RotateCube()
     {
@@ -93,6 +105,8 @@ public class MyListener : MonoBehaviour
 
             Vector3 r = new Vector3(xGyro * sensitivity, yGyro * sensitivity, zGyro * sensitivity);
             cubeModifier.transform.eulerAngles = cubeModifier.transform.eulerAngles + r;
+            Vector3 p = new Vector3(xAccel * sensitivityA, yAccel * sensitivityA, zAccel * sensitivityA);
+            cubeModifier.transform.position = Vector3.zero + p;
         }
     }
 }
