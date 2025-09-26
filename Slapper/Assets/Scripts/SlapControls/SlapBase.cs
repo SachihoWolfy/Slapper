@@ -16,6 +16,14 @@ public class SlapBase : MonoBehaviour
     float lastForce = 0f;
     public Direction lastSlapDirection = Direction.NONE;
     public Vector3 lastDisiredRotation;
+    SpriteDebug sd;
+    private void Start()
+    {
+        if (sd == null)
+        {
+            sd = gameObject.GetComponent<SpriteDebug>();
+        }
+    }
 
     private void Update()
     {
@@ -95,6 +103,7 @@ public class SlapBase : MonoBehaviour
             transform.eulerAngles = curAngle ;
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, (slapTimer - realTime) / realTime);
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, (slapTimer - realTime) / realTime);
+            sd.Default();
         }
     }
 
