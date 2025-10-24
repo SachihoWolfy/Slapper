@@ -37,7 +37,7 @@ public class MyListener : MonoBehaviour
 
     void Start() // Start is called before the first frame update
     {
-        cubeModifier = GameObject.Find("Cube");
+        cubeModifier = this.gameObject;
     }
     void Update() // Update is called once per frame
     {
@@ -88,7 +88,7 @@ public class MyListener : MonoBehaviour
         {
             zAccel = 0;
         }
-        Debug.Log("XA: " + xAccel + " YA: " +  yAccel + " ZA: " +  zAccel + "   XG: " + xGyro + " YG: " + yGyro + " ZG: " + zGyro);
+        //Debug.Log("XA: " + xAccel + " YA: " +  yAccel + " ZA: " +  zAccel + "   XG: " + xGyro + " YG: " + yGyro + " ZG: " + zGyro);
     }
     // Invoked when a connect/disconnect event occurs. The parameter 'success'
     // will be 'true' upon connection, and 'false' upon disconnection or
@@ -103,10 +103,10 @@ public class MyListener : MonoBehaviour
         if (cubeModifier != null)
         {
 
-            Vector3 r = new Vector3(xGyro * sensitivity, yGyro * sensitivity, zGyro * sensitivity);
-            cubeModifier.transform.eulerAngles = cubeModifier.transform.eulerAngles + r;
-            Vector3 p = new Vector3(xAccel * sensitivityA, yAccel * sensitivityA, zAccel * sensitivityA);
-            cubeModifier.transform.position = Vector3.zero + p;
+            Vector3 r = new Vector3(xGyro * sensitivity, zGyro * sensitivity, yGyro * sensitivity);
+            cubeModifier.transform.localEulerAngles = cubeModifier.transform.localEulerAngles + r;
+            //Vector3 p = new Vector3(xAccel * sensitivityA, yAccel * sensitivityA, zAccel * sensitivityA);
+            //cubeModifier.transform.position = Vector3.zero + p;
         }
     }
 }

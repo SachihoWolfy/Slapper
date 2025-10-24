@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     public KeyCode turnRight = KeyCode.E;
     public KeyCode punch = KeyCode.P;
 
-    public PunchingBagInput bagInput;
+    public PunchingBagInput bagInput = PunchingBagInput.STATIONARY;
 
     PlayerController controller;
 
@@ -24,17 +24,18 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        ProcessBagInput();
 
         if (Input.GetKeyUp(forward) || bagInput == PunchingBagInput.FORWARD_TILT) { controller.MoveForward(); }
-        if (Input.GetKeyUp(backward) || bagInput == PunchingBagInput.BACK_SLAM) { controller.MoveBackward(); }
+        if (Input.GetKeyUp(backward) || bagInput == PunchingBagInput.BACK_TILT) { controller.MoveBackward(); }
         if (Input.GetKeyUp(left)) { controller.MoveLeft(); }
         if (Input.GetKeyUp(right)) { controller.MoveRight(); }
-        if (Input.GetKeyUp(turnLeft) || bagInput == PunchingBagInput.LEFT_SLAM) { controller.RotateLeft(); }
-        if (Input.GetKeyUp(turnRight) || bagInput == PunchingBagInput.RIGHT_SLAM) { controller.RotateRight(); }
-        if (Input.GetKeyUp(punch) || bagInput == PunchingBagInput.FORWARD_SLAM) { controller.Punch(); }
+        if (Input.GetKeyUp(turnLeft) || bagInput == PunchingBagInput.LEFT_TILT) { controller.RotateLeft(); }
+        if (Input.GetKeyUp(turnRight) || bagInput == PunchingBagInput.RIGHT_TILT) { controller.RotateRight(); }
+        if (Input.GetKeyUp(punch) || bagInput == PunchingBagInput.FORWARD_TILT) { controller.Punch(); }
+
+        ResetBagInput();
     }
-    private void ProcessBagInput()
+    private void ResetBagInput()
     {
         //implement
         bagInput = PunchingBagInput.STATIONARY;
