@@ -78,7 +78,6 @@ public class PunchingInput : MonoBehaviour
                 input = PunchingBagInput.RIGHT_TILT;
             }
         }
-        Debug.Log(input.ToString());
         return input;
     }
 }
