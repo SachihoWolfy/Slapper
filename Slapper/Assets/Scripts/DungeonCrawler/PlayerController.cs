@@ -45,15 +45,14 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
             }
         }
-        else
-        {
-            targetGridPos = prevTargetGridPos;
-        }
     }
 
     public void RotateLeft() { if (AtRest) targetRotation -= Vector3.up * 90f; }
     public void RotateRight() { if (AtRest) targetRotation += Vector3.up * 90f; }
-    public void MoveForward() { if (AtRest && isForwardAvailable()) targetGridPos += transform.forward * gridSize; }
+    public void MoveForward() {
+        if (AtRest && isForwardAvailable()) targetGridPos += transform.forward * gridSize;
+        else if (AtRest && !isForwardAvailable()) Punch();
+    }
     public void MoveBackward() { if (AtRest) targetGridPos -= transform.forward * gridSize; }
     public void MoveLeft() { if(AtRest) targetGridPos -= transform.right * gridSize; }
     public void MoveRight() { if (AtRest) targetGridPos += transform.right * gridSize; }

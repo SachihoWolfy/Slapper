@@ -16,7 +16,6 @@ public class PunchingInput : MonoBehaviour
     public float zThreshold = 5f;
     public float recoilRecoveryCooldown = 0.4f;
     PunchingBagInput recoilState = PunchingBagInput.BACK_TILT;
-    float recoilTimer = 0f;
     // Start is called before the first frame update
     void Start()
     {
