@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Vector3 targetGridPos;
     Vector3 prevTargetGridPos;
     Vector3 targetRotation;
+    public FistAnimator fistAnimator;
 
     private void Start()
     {
@@ -77,11 +78,16 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Trying Action: " +  punchAction.ToString());
                 punchAction.Execute();
+                fistAnimator.IsPunching = true;
             }
             else
             {
                 Debug.LogError("Punch Action is NULL");
             }
+        }
+        else
+        {
+            fistAnimator.IsPushing = true;
         }
     }
     public bool isForwardAvailable()
