@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour
     public float transitionRotationSpeed = 500f;
     public int gridSize = 2;
     public LayerMask punchableLayerMask;
+    public LayerMask collisionLayerMask;
     Vector3 targetGridPos;
     Vector3 prevTargetGridPos;
     Vector3 targetRotation;
+    public FistAnimator fistAnimator;
 
     private void Start()
     {
@@ -44,15 +46,14 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
             }
         }
-        else
-        {
-            targetGridPos = prevTargetGridPos;
-        }
     }
 
     public void RotateLeft() { if (AtRest) targetRotation -= Vector3.up * 90f; }
     public void RotateRight() { if (AtRest) targetRotation += Vector3.up * 90f; }
-    public void MoveForward() { if (AtRest) targetGridPos += transform.forward * gridSize; }
+    public void MoveForward() {
+        if (AtRest && isForwardAvailable()) targetGridPos += transform.forward * gridSize;
+        else if (AtRest && !isForwardAvailable()) Punch();
+    }
     public void MoveBackward() { if (AtRest) targetGridPos -= transform.forward * gridSize; }
     public void MoveLeft() { if(AtRest) targetGridPos -= transform.right * gridSize; }
     public void MoveRight() { if (AtRest) targetGridPos += transform.right * gridSize; }
@@ -75,9 +76,28 @@ public class PlayerController : MonoBehaviour
             Action punchAction = hit.transform.gameObject.GetComponent<Action>();
             if (punchAction != null)
             {
+                Debug.Log("Trying Action: " +  punchAction.ToString());
                 punchAction.Execute();
+                fistAnimator.IsPunching = true;
+            }
+            else
+            {
+                Debug.LogError("Punch Action is NULL");
             }
         }
+        else
+        {
+            fistAnimator.IsPushing = true;
+        }
+    }
+    public bool isForwardAvailable()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, gridSize, collisionLayerMask))
+        {
+            return false;
+        }
+        return true;
     }
     private void Update()
     {
