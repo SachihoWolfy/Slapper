@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 8934501983576151699}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  activeMovement: 1
   speed: 2
   distanceThreshold: 1.2
   movecount: 80

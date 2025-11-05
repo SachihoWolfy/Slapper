@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 5187196848346904792}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd321ac608197b44db95ade029672f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputCooldown: 0.4
+  inputCooldown: 0.6
   xThreshold: 10
   zThreshold: 10
   recoilRecoveryCooldown: 0.4
@@ -599,8 +599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.17001343, y: 274.50012}
-  m_SizeDelta: {x: 975.67, y: 549}
+  m_AnchoredPosition: {x: 0.00049292, y: 224.99}
+  m_SizeDelta: {x: 800, y: 449.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1611534365802325607
 Animator:
@@ -636,6 +636,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPunching: 0
+  IsPushing: 0
+  IsDancing: 0
+  IsLeft: 0
 --- !u!1 &6586546665435120785
 GameObject:
   m_ObjectHideFlags: 0

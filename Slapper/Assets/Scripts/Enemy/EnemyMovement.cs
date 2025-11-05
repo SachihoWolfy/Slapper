@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
+    public bool activeMovement = true;
     static PlayerController pc;
     public float speed;
     public float distanceThreshold = 1.2f;
@@ -17,12 +18,19 @@ public class EnemyMovement : MonoBehaviour
         {
             pc = FindObjectOfType<PlayerController>();
         }
-        if (framecount == 0)
+        if (activeMovement)
         {
-            framecount = movecount;
+            if(target == null)
+            {
+                target = pc.transform;
+            }
+            if (framecount == 0)
+            {
+                framecount = movecount;
+                MoveToLocation(target.position);
+            }
             MoveToLocation(target.position);
         }
-        MoveToLocation(target.position);
     }
     public void MoveToLocation(Vector3 targetPos)
     {
