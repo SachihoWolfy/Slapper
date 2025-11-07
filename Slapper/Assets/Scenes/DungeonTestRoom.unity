@@ -31551,6 +31551,10 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3614662372259956675, guid: 5e85165ca4ca88c40bfb348bcb18210b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5013381964777567819, guid: 5e85165ca4ca88c40bfb348bcb18210b, type: 3}
       propertyPath: m_Name
       value: Player (1)

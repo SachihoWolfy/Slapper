@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 prevTargetGridPos;
     Vector3 targetRotation;
     public FistAnimator fistAnimator;
+    public GameObject atRestUI;
 
     private void Start()
     {
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("Punch Action is NULL");
             }
         }
-        else
+        else if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, gridSize + 1 ,collisionLayerMask))
         {
             fistAnimator.IsPushing = true;
         }
