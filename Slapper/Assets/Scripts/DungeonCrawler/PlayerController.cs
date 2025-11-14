@@ -7,10 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     public bool smoothTransition = false;
     public float transitionSpeed = 10f;
+    private float defaultSpeed = 10f;
+    public float nodeSpeed = 20f;
     public float transitionRotationSpeed = 500f;
     public int gridSize = 2;
     public LayerMask punchableLayerMask;
     public LayerMask collisionLayerMask;
+    public float nodeCheckDistance = 100f;
+    public LayerMask nodeCheckLayerMask;
     Vector3 targetGridPos;
     Vector3 prevTargetGridPos;
     Vector3 targetRotation;
@@ -52,7 +56,19 @@ public class PlayerController : MonoBehaviour
     public void RotateLeft() { if (AtRest) targetRotation -= Vector3.up * 90f; }
     public void RotateRight() { if (AtRest) targetRotation += Vector3.up * 90f; }
     public void MoveForward() {
-        if (AtRest && isForwardAvailable()) targetGridPos += transform.forward * gridSize;
+        if (AtRest && isForwardAvailable())
+        {
+            if (CheckForNode())
+            {
+                transitionSpeed = nodeSpeed;
+                Debug.Log("Noded");
+            }
+            else
+            {
+                transitionSpeed = defaultSpeed;
+                targetGridPos += transform.forward * gridSize;
+            }
+        }
         else if (AtRest && !isForwardAvailable()) Punch();
     }
     public void MoveBackward() { if (AtRest) targetGridPos -= transform.forward * gridSize; }
@@ -91,9 +107,24 @@ public class PlayerController : MonoBehaviour
             fistAnimator.IsPushing = true;
         }
     }
+
+    public bool CheckForNode()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, nodeCheckDistance, nodeCheckLayerMask))
+        {
+            if (hit.collider.gameObject.CompareTag("Node"))
+            {
+                targetGridPos = hit.collider.transform.position;
+                return true;
+            }
+        }
+        return false;
+    }
     public bool isForwardAvailable()
     {
         RaycastHit hit;
+
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, gridSize, collisionLayerMask))
         {
             return false;

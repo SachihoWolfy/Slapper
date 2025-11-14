@@ -525,6 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothTransition: 1
   transitionSpeed: 10
+  nodeSpeed: 13.5
   transitionRotationSpeed: 500
   gridSize: 2
   punchableLayerMask:
@@ -533,6 +534,10 @@ MonoBehaviour:
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 448
+  nodeCheckDistance: 100
+  nodeCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 960
   fistAnimator: {fileID: 4070125187356357677}
   atRestUI: {fileID: 6425583333675094491}
 --- !u!114 &4564529105696852744
