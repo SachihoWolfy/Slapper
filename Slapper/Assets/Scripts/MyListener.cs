@@ -103,7 +103,7 @@ public class MyListener : MonoBehaviour
         if (cubeModifier != null)
         {
 
-            Vector3 r = new Vector3(xGyro * sensitivity, zGyro * sensitivity, yGyro * sensitivity);
+            Vector3 r = new Vector3(zGyro * sensitivity, xGyro * sensitivity, yGyro * sensitivity);
             cubeModifier.transform.localEulerAngles = cubeModifier.transform.localEulerAngles + r;
             //Vector3 p = new Vector3(xAccel * sensitivityA, yAccel * sensitivityA, zAccel * sensitivityA);
             //cubeModifier.transform.position = Vector3.zero + p;

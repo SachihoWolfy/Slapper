@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AcceleratorDeadzone: {x: 2000, y: 2000, z: 2000}
   GryoDeadzone: {x: 3000, y: 3000, z: 3000}
-  sensitivity: -0.00003
+  sensitivity: -0.0001
   sensitivityA: 0.000001
   zDrift: 0.0001
   error: 0.0001

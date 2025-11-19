@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     {
 
         if (Input.GetKeyUp(forward) || bagInput == PunchingBagInput.FORWARD_TILT) { controller.MoveForward(); }
-        if (Input.GetKeyUp(backward) || bagInput == PunchingBagInput.BACK_TILT) { controller.MoveBackward(); }
+        //if (Input.GetKeyUp(backward) || bagInput == PunchingBagInput.BACK_TILT) { controller.MoveBackward(); }
         if (Input.GetKeyUp(left)) { controller.MoveLeft(); }
         if (Input.GetKeyUp(right)) { controller.MoveRight(); }
         if (Input.GetKeyUp(turnLeft) || bagInput == PunchingBagInput.LEFT_TILT) { controller.RotateLeft(); }

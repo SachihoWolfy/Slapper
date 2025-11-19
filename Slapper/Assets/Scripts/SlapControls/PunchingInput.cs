@@ -14,8 +14,9 @@ public class PunchingInput : MonoBehaviour
 
     public float xThreshold = 5f;
     public float zThreshold = 5f;
-    public float recoilRecoveryCooldown = 0.4f;
+    public float recoilRecoveryCooldown = 0.2f;
     PunchingBagInput recoilState = PunchingBagInput.BACK_TILT;
+    public GameObject inputUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,14 @@ public class PunchingInput : MonoBehaviour
     void RotationToInput()
     {
         PunchingBagInput input = ProcessInput();
-
+        if(inputCooldownTimer > 0)
+        {
+            inputUI.SetActive(false);
+        }
+        else
+        {
+            inputUI.SetActive(true);
+        }
         if (inputCooldownTimer > 0 || input == prevInput)
         {
             inputCooldownTimer -= Time.deltaTime;
