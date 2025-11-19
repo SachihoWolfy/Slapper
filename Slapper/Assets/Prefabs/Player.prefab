@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105784803536849232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 921835493413625032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 3980660649406271773}
   - component: {fileID: 4564529105696852744}
   - component: {fileID: 5187196848346904792}
+  - component: {fileID: 3260500032039209456}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -508,7 +509,7 @@ MonoBehaviour:
   gridSize: 2
   punchableLayerMask:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 192
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 448
@@ -549,6 +550,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyAmount: 0
   goalPlush: 0
+--- !u!65 &3260500032039209456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013381964777567819}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5483127251215293814
 GameObject:
   m_ObjectHideFlags: 0
