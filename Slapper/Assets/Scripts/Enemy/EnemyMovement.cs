@@ -31,6 +31,7 @@ public class EnemyMovement : MonoBehaviour
             }
             MoveToLocation(target.position);
         }
+        DoLatch();
     }
     public void MoveToLocation(Vector3 targetPos)
     {
@@ -72,10 +73,12 @@ public class EnemyMovement : MonoBehaviour
                 finalPos.z = targetPos.z;
             }
         }
+        // Snap
         if (Mathf.Abs(targetPos.z - transform.position.z) <= distanceThreshold && Mathf.Abs(targetPos.x - transform.position.x) <= distanceThreshold )
         {
             finalPos = target.position + target.forward * distanceThreshold;
             transform.LookAt(target.position);
+            latched = true;
         }
         else
         {
@@ -95,5 +98,25 @@ public class EnemyMovement : MonoBehaviour
             return false;
         }
         return true;
+    }
+    public bool latched = false;
+    float latchTick = 3f;
+    float latchTimer = 3f;
+    public void DoLatch()
+    {
+        if (latched)
+        {
+            latchTimer -= Time.deltaTime;
+        }
+        else
+        {
+            latchTimer = latchTick;
+        }
+
+        if (latchTimer <= 0)
+        {
+            latchTimer = latchTick;
+            pc.TakeDamage();
+        }
     }
 }

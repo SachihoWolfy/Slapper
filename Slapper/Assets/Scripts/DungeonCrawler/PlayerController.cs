@@ -139,4 +139,8 @@ public class PlayerController : MonoBehaviour
     {
         //Implement
     }
+    public void TakeDamage()
+    {
+        FindObjectOfType<HealthDisplay>().healthCount--;
+    }
 }
